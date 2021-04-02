@@ -14,7 +14,8 @@ class JobCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $jobCategory = JobCategory::all();
+        return view('jobcategory.index',compact('jobCategory'));
     }
 
     /**
@@ -24,7 +25,7 @@ class JobCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('jobcategory.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class JobCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        JobCategory::create(
+            [
+                'category_name' =>$request->category_name 
+            ]
+        );
+        return redirect()->route('jobcategory.index');
     }
 
     /**
@@ -57,7 +64,7 @@ class JobCategoryController extends Controller
      */
     public function edit(JobCategory $jobCategory)
     {
-        //
+        return view('jobtcategory.update',compact('jobCategory'));
     }
 
     /**
@@ -69,7 +76,13 @@ class JobCategoryController extends Controller
      */
     public function update(Request $request, JobCategory $jobCategory)
     {
-        //
+        $jobCategory->update(
+            [
+                'category_name' =>$request->category_name
+            ]
+        );
+        return redirect()->route('jobcategory.index');
+    
     }
 
     /**
@@ -80,6 +93,7 @@ class JobCategoryController extends Controller
      */
     public function destroy(JobCategory $jobCategory)
     {
-        //
+        $jobCategory->delete();
+        return redirect()->route('jobCategory.index');
     }
 }

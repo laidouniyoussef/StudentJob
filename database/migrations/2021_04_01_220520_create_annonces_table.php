@@ -15,10 +15,20 @@ class CreateAnnoncesTable extends Migration
     {
         Schema::create('annonces', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
+            $table->string('title');
+            $table->text('job_desc');
+            $table->text('address');
+            $table->text('skills');
+            $table->integer('nbr_profils_needed');
+            $table->float('salaire');
+            $table->string('job_nature');
+            $table->string('duration');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('job_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

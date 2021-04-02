@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Annonce;
+use App\Models\JobCategory;
 use Illuminate\Http\Request;
 
 class AnnonceController extends Controller
@@ -14,7 +15,9 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        //
+        $annonce = Annonce::all();
+        return view('annonce.index',compact('annonce'));
+    
     }
 
     /**
@@ -24,7 +27,9 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        //
+        $jobCategory = JobCategory::all();
+        return view('annonce.create',compact('jobCategory'));
+    
     }
 
     /**
@@ -35,7 +40,20 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Annonce::create(
+            [
+                'title' => $request->title,
+                'job_desc' => $request->job_desc,
+                'address' => $request->address,
+                'skills' => $request->skills,
+                'nbr_profils_needed' => $request->nbr_profils_needed, 
+                'salaire' => $request->salaire,
+                'job_nature' => $request->job_nature,
+                'duration' => $request->duration,
+                'category_id' => $request->job_category
+            ]
+         );
+         return redirect()->route('annonce.index');
     }
 
     /**
@@ -57,7 +75,8 @@ class AnnonceController extends Controller
      */
     public function edit(Annonce $annonce)
     {
-        //
+        $jobCategory = JobCategory::all();
+        return view('annonce.update',compact('product','jobCategory'));
     }
 
     /**
@@ -69,7 +88,20 @@ class AnnonceController extends Controller
      */
     public function update(Request $request, Annonce $annonce)
     {
-        //
+        $annonce->update(
+            [
+                'title' => $request->title,
+                'job_desc' => $request->job_desc,
+                'address' => $request->address,
+                'skills' => $request->skills,
+                'nbr_profils_needed' => $request->nbr_profils_needed, 
+                'salaire' => $request->salaire,
+                'job_nature' => $request->job_nature,
+                'duration' => $request->duration,
+                'category_id' => $request->job_category
+            ]
+            );
+            return redirect()->route('annonce.index');
     }
 
     /**
@@ -80,6 +112,7 @@ class AnnonceController extends Controller
      */
     public function destroy(Annonce $annonce)
     {
-        //
+        $annonce->delete();
+        return redirect()->route('annonce.index');
     }
 }
