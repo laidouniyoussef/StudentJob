@@ -14,7 +14,8 @@ class PostulerController extends Controller
      */
     public function index()
     {
-        //
+        $postuler=Postuler::all();
+        return view('postuler.index',['postuler'=>$postuler]);
     }
 
     /**
@@ -24,7 +25,7 @@ class PostulerController extends Controller
      */
     public function create()
     {
-        //
+     
     }
 
     /**
@@ -35,7 +36,11 @@ class PostulerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data['id_Student']=$request->id_Student;
+     $data['id_Company']=$request->id_Company;
+     $data['date'] =$request->date;
+     Postuler::create($data);
+     return redirect()->route('postuler.index');
     }
 
     /**
@@ -46,7 +51,8 @@ class PostulerController extends Controller
      */
     public function show(Postuler $postuler)
     {
-        //
+        $post= Postuler::findOrFail($postuler);  
+        return view('postuler.show',[ 'postuler' => $post]); 
     }
 
     /**

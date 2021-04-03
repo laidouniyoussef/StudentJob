@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Postuler extends Model
 {
     use HasFactory;
+    public function student()
+    {
+        return $this->belongsTo(student::class);
+    }
 }

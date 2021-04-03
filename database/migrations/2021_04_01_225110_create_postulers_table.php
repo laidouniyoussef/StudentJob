@@ -18,6 +18,8 @@ class CreatePostulersTable extends Migration
             $table->string("id_Student");
             $table->string("id_Company");
             $table->string("date");
+            $table->foreign('id_Student')->references('id')->on('student')->onDelete('cascade');
+            $table->foreign('id_Company')->references('id')->on('entreprises')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreateEntreprisesTable extends Migration
             $table->string("Company_NumTel");
             $table->string("Company_Name");
             $table->string("logo");
+            $table->string("Password");
             $table->timestamps();
         });
     }

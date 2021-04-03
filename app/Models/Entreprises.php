@@ -12,5 +12,15 @@ class Entreprises extends Model
         'Company_Email',
         'Company_NumTel',
         'Company_Name',
-        'logo'];
+        'logo',
+        'Password'];
+
+    protected $hidden = [
+            'password',
+        ];
+
+    public function Annonce()
+        {
+            return $this->hasMany(Annonce::class);
+        }
 }
